@@ -3,31 +3,32 @@ package main
 import (
 	"fmt"
 	"log"
-
-	"github.com/crazybirdz/learngo/myDict"
+	"net/http"
 )
 
 func main() {
-	dictionary := myDict.Dictionary{"first": "First word"}
-	baseWord := "hello"
-	err := dictionary.Add(baseWord, "Greeting")
-	if err != nil {
-		log.Fatalln(err)
+	urls := []string{"https://www.google.com",
+		"https://www.youtube.com",
+		"https://www.facebook.com",
+		"https://www.twitter.com",
+		"https://www.instagram.com",
+		"https://www.baidu.com",
+		"https://www.wikipedia.org",
+		"https://www.yandex.ru",
+		"https://www.yahoo.com",
+		"https://www.amazon.com",
+		"https://www.netflix.com",
+		"https://www.live.com",
+		"https://www.zoom.us"}
+	for _, url := range urls {
+		hitURL(url)
 	}
-	fmt.Println(dictionary)
-	_, err2 := dictionary.Search(baseWord)
-	if err2 != nil {
-		log.Fatalln(err)
+}
+
+func hitURL(url string) {
+	fmt.Println("Checking :", url)
+	resp, err := http.Get(url)
+	if err != nil || resp.StatusCode >= 400 {
+		log.Fatalln("Error")
 	}
-	err3 := dictionary.Update(baseWord, "Hi")
-	if err3 != nil {
-		log.Fatalln(err3)
-	}
-	fmt.Println(dictionary)
-	// err4 := dictionary.Update("jiojvcxz", "jbviofaj")
-	// if err4 != nil {
-	// 	log.Fatalln(err4)
-	// }
-	dictionary.Delete(baseWord)
-	fmt.Println(dictionary)
 }
