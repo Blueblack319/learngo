@@ -48,9 +48,8 @@ func canIDrinkSwitch(age int) bool {
 }
 
 func main() {
-	namesArr := [5]string{"Aiden", "James", "Asher"}
-	namesArr[4] = "Kane"
-	namesSlice := []string{"Aiden", "Kane"}
-	namesSlice = append(namesSlice, "Alley")
-	fmt.Println(namesArr, namesSlice)
+	hoon := map[string]string{"name": "Jae-Hoon", "age": "23"}
+	for key, value := range hoon {
+		fmt.Println(key, value)
+	}
 }
