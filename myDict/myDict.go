@@ -3,8 +3,11 @@ package myDict
 import "errors"
 
 // errors
-var errNotFound = errors.New("not Found")
-var errWordExits = errors.New("that word already exists")
+var (
+	errNotUpdated = errors.New("that word not exists")
+	errNotFound   = errors.New("not Found")
+	errWordExits  = errors.New("that word already exists")
+)
 
 // Dictionary type
 type Dictionary map[string]string
@@ -19,7 +22,7 @@ func (d Dictionary) Search(word string) (string, error) {
 }
 
 // Add a word to the dictionary
-func (d Dictionary) Add(word string, def string) error {
+func (d Dictionary) Add(word, def string) error {
 	_, err := d.Search(word)
 	switch err {
 	case errNotFound:
@@ -31,3 +34,18 @@ func (d Dictionary) Add(word string, def string) error {
 }
 
 // Update the word in dictionary
+func (d Dictionary) Update(word, definition string) error {
+	_, err := d.Search(word)
+	switch err {
+	case errNotFound:
+		return errNotUpdated
+	case nil:
+		d[word] = definition
+	}
+	return nil
+}
+
+// Delete a word
+func (d Dictionary) Delete(word string) {
+	delete(d, word)
+}
