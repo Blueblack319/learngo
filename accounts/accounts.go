@@ -17,11 +17,11 @@ func NewAccount(owner string) *Account {
 }
 
 // Deposit to an account
-func (a Account) Deposit(amount int) {
+func (a *Account) Deposit(amount int) {
 	a.balance += amount
 }
 
 // Balance to show remainer
-func (a Account) Balance() int{
+func (a Account) Balance() int {
 	return a.balance
 }
