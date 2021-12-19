@@ -48,8 +48,9 @@ func canIDrinkSwitch(age int) bool {
 }
 
 func main() {
-	a := 2
-	b := &a
-	*b = 202020
-	fmt.Println(a)
+	namesArr := [5]string{"Aiden", "James", "Asher"}
+	namesArr[4] = "Kane"
+	namesSlice := []string{"Aiden", "Kane"}
+	namesSlice = append(namesSlice, "Alley")
+	fmt.Println(namesArr, namesSlice)
 }
