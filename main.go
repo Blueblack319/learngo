@@ -5,8 +5,11 @@ import (
 	"strings"
 )
 
-func lenAndUpper(name string) (int, string) {
-	return len(name), strings.ToUpper(name)
+func lenAndUpper(name string) (length int, uppercase string) {
+	defer fmt.Println("I'm done.")
+	length = len(name)
+	uppercase = strings.ToUpper(name)
+	return
 }
 
 func multiArgs(strings ...string) []string {
@@ -14,6 +17,6 @@ func multiArgs(strings ...string) []string {
 }
 
 func main() {
-	names := multiArgs("James", "Arts", "huddy")
-	fmt.Println(names)
+	leng, _ := lenAndUpper("James")
+	fmt.Println(leng)
 }
