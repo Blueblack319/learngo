@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 )
 
 func main() {
+	var results = map[string]bool{}
 	urls := []string{"https://www.google.com",
 		"https://www.youtube.com",
 		"https://www.facebook.com",
@@ -21,14 +21,18 @@ func main() {
 		"https://www.live.com",
 		"https://www.zoom.us"}
 	for _, url := range urls {
-		hitURL(url)
+		checkURL(url, results)
+	}
+	for url, result := range results {
+		fmt.Println(url, result)
 	}
 }
 
-func hitURL(url string) {
+func checkURL(url string, results map[string]bool) {
 	fmt.Println("Checking :", url)
 	resp, err := http.Get(url)
 	if err != nil || resp.StatusCode >= 400 {
-		log.Fatalln("Error")
+		results[url] = false
 	}
+	results[url] = true
 }
