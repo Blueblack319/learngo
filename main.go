@@ -48,5 +48,8 @@ func canIDrinkSwitch(age int) bool {
 }
 
 func main() {
-	fmt.Println(canIDrinkSwitch(18))
+	a := 2
+	b := &a
+	*b = 202020
+	fmt.Println(a)
 }
