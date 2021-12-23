@@ -6,13 +6,18 @@ import (
 )
 
 func main() {
-	go whoIsSexy("Hoon")
-	whoIsSexy("Aiden")
+	c := make(chan string)
+	people := [2]string{"hyang", "gwang"}
+	for _, person := range people {
+		go isSexy(person, c)
+	}
+	resultOne := <-c
+	resultTwo := <-c
+	fmt.Println(resultOne)
+	fmt.Println(resultTwo)
 }
 
-func whoIsSexy(name string) {
-	for i := 0; i < 10; i++ {
-		fmt.Println(name, "is sexy.", i)
-		time.Sleep(time.Second)
-	}
+func isSexy(name string, c chan string) {
+	time.Sleep(time.Second * 2)
+	c <- name + " is sexy"
 }
