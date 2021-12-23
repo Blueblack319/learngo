@@ -7,14 +7,13 @@ import (
 
 func main() {
 	c := make(chan string)
-	people := [2]string{"hyang", "gwang"}
+	people := []string{"hyang", "gwang", "hoon", "crazybirdz", "crossbeam"}
 	for _, person := range people {
 		go isSexy(person, c)
 	}
-	resultOne := <-c
-	resultTwo := <-c
-	fmt.Println(resultOne)
-	fmt.Println(resultTwo)
+	for i := 0; i < len(people); i++ {
+		fmt.Println(<-c)
+	}
 }
 
 func isSexy(name string, c chan string) {
